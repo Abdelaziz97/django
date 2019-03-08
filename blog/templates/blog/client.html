@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+{% block content %}
+  <project class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ client.lastName }} {{ client.firstName }}</a>
+        <small class="text-muted">{{ client.phoneNumber }}</small>
+      </div>
+      <p class="article-content">{{ client.firm }}</p>
+      {% for project in client.project %}
+          <h2>Projects :</h2>
+          <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;Title : {{ project.name }}</p>
+          <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;Duration : {{ project.duration }} ({{ project.startDate }} -> {{ project.endDate }} )</p>
+      {% endfor %}
+      {% for task in client.task %}
+          <h2>Tasks :</h2>
+          <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;Abstract : {{ task.abstract }}</p>
+          <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;Duration : {{ task.duration }} ( {{ task.startTime }} -> {{ task.endTime }} )</p>
+      {% endfor %}
+    </div>
+  </project>
+{% endblock content %}
