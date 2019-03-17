@@ -5,18 +5,22 @@
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" href="#">{{ project.name }}</a>
-              <small class="text-muted">{{ project.startDate }} -> {{ project.endDate }}</small>
+              <small class="text-muted">{{ project.startDate | date:"F d, Y" }} -> {{ project.endDate | date:"F d, Y" }}</small>
             </div>
-            {% for client in project.client %}
-                <h2>Clients :</h2>
-                <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;Name : {{ client.lastName }} {{ client.firstName }}</p>
-                <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;Firm : {{ client.firm }}</p>
-                <p class="article-content display">&nbsp;&nbsp;&nbsp;&nbsp;Phone number : {{ client.phoneNumber }}</p>
-            {% endfor %}
-            {% for task in project.task %}
-                <h2>Tasks :</h2>
-                <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;Abstract : {{ task.abstract }}</p>
-                <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;Duration : {{ task.duration }} ( {{ task.startTime }} -> {{ task.endTime }} )</p>
+            <h2>Clients :</h2>
+            {% for client in project.client.in_bulk.values %}
+              <h8>&nbsp;&nbsp;{{ client.id }}</h8>
+              <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name : {{ client.lastName }} {{ client.firstName }}</p>
+              <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Firm : {{ client.firm }}</p>
+              <p class="article-content display">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone number : {{ client.phoneNumber }}</p>
+              {% if client.task_set.first %}
+                <h5>&nbsp;&nbsp;&nbsp;&nbsp;Tasks :</h5>
+              {% endif %}
+              {% for task in client.task_set.all %}
+                  <h10>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ task.id }}</h10>
+                  <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abstract : {{ task.abstract }}</p>
+                  <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duration : {{ task.duration }} hours ( {{ task.startTime }} -> {{ task.endTime }} )</p>
+              {% endfor %}
             {% endfor %}
           </div>
         </project>

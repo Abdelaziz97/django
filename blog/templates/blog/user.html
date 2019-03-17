@@ -11,7 +11,7 @@
             {% for project in client.project %}
                 <h2>Projects :</h2>
                 <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;Title : {{ project.name }}</p>
-          <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;Duration : {{ project.duration }} ({{ project.startDate }} -> {{ project.endDate }} )</p>
+          <p class="article-content">&nbsp;&nbsp;&nbsp;&nbsp;Duration : {{ project.duration }} ({{ project.startDate | date:"F d, Y" }} -> {{ project.endDate | date:"F d, Y" }} )</p>
             {% endfor %}
             {% for task in client.task %}
                 <h2>Tasks :</h2>
