@@ -4,6 +4,7 @@
         <project class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
+              <img class="rounded-circle article-img" src="{{ project.client.profile.image.url }}">
               <a class="mr-2" href="#">{{ project.name }}</a>
               <small class="text-muted">{{ project.startDate | date:"F d, Y" }} -> {{ project.endDate | date:"F d, Y" }}</small>
             </div>
